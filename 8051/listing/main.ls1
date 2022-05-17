@@ -1,0 +1,924 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.OBJ
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE .\Objects\main.src PR(.\Listings\main.ls1) EP DEBUG
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; .\Objects\main.SRC generated from: main.c
+                       2     ; COMPILER INVOKED BY:
+                       3     ;        C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
+                             T(.\Listings\main.lst) TABS(2) SRC(.\Objects\main.SRC)
+                       4     
+                       5     $nomod51 
+                       6     
+                       7     NAME    MAIN
+                       8     
+  0080                 9     P0      DATA    080H
+  0090                10     P1      DATA    090H
+  00A0                11     P2      DATA    0A0H
+  00B0                12     P3      DATA    0B0H
+  00B5                13     MQ05    BIT     0B0H.5
+  00B4                14     T0      BIT     0B0H.4
+  00D6                15     AC      BIT     0D0H.6
+  00B5                16     T1      BIT     0B0H.5
+  00AF                17     EA      BIT     0A8H.7
+  00B7                18     LED_LCD BIT     0B0H.7
+  0094                19     ADC0804_RD      BIT     090H.4
+  0093                20     ADC0804_CS      BIT     090H.3
+  00A8                21     IE      DATA    0A8H
+  0090                22     EN      BIT     090H.0
+  00B7                23     RD      BIT     0B0H.7
+  00AC                24     ES      BIT     0A8H.4
+  00B8                25     IP      DATA    0B8H
+  0098                26     RI      BIT     098H.0
+  00B2                27     INT0    BIT     0B0H.2
+  00D7                28     CY      BIT     0D0H.7
+  0099                29     TI      BIT     098H.1
+  00B3                30     INT1    BIT     0B0H.3
+  00B3                31     INT_LCD BIT     0B0H.3
+  0095                32     ADC0804_WR      BIT     090H.5
+  00BC                33     PS      BIT     0B8H.4
+  0081                34     SP      DATA    081H
+  0092                35     RS      BIT     090H.2
+  00D2                36     OV      BIT     0D0H.2
+  0091                37     RW      BIT     090H.1
+  00B6                38     WR      BIT     0B0H.6
+  0099                39     SBUF    DATA    099H
+  0087                40     PCON    DATA    087H
+  0098                41     SCON    DATA    098H
+  0096                42     ADC0804_INTR    BIT     090H.6
+  0089                43     TMOD    DATA    089H
+  0088                44     TCON    DATA    088H
+  0089                45     IE0     BIT     088H.1
+  008B                46     IE1     BIT     088H.3
+  00F0                47     B       DATA    0F0H
+  00B4                48     DHT11   BIT     0B0H.4
+  00E0                49     ACC     DATA    0E0H
+  00B0                50     UART_RX BIT     0B0H.0
+  00A9                51     ET0     BIT     0A8H.1
+  00B1                52     UART_TX BIT     0B0H.1
+  00AB                53     ET1     BIT     0A8H.3
+  008D                54     TF0     BIT     088H.5
+  008F                55     TF1     BIT     088H.7
+  009A                56     RB8     BIT     098H.2
+  008C                57     TH0     DATA    08CH
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     2
+
+  00A8                58     EX0     BIT     0A8H.0
+  0088                59     IT0     BIT     088H.0
+  008D                60     TH1     DATA    08DH
+  009B                61     TB8     BIT     098H.3
+  00AA                62     EX1     BIT     0A8H.2
+  008A                63     IT1     BIT     088H.2
+  00D0                64     P       BIT     0D0H.0
+  009F                65     SM0     BIT     098H.7
+  008A                66     TL0     DATA    08AH
+  009E                67     SM1     BIT     098H.6
+  008B                68     TL1     DATA    08BH
+  009D                69     SM2     BIT     098H.5
+  00B9                70     PT0     BIT     0B8H.1
+  00BB                71     PT1     BIT     0B8H.3
+  00D3                72     RS0     BIT     0D0H.3
+  008C                73     TR0     BIT     088H.4
+  00D4                74     RS1     BIT     0D0H.4
+  008E                75     TR1     BIT     088H.6
+  00B8                76     PX0     BIT     0B8H.0
+  00BA                77     PX1     BIT     0B8H.2
+  0083                78     DPH     DATA    083H
+  0082                79     DPL     DATA    082H
+  009C                80     REN     BIT     098H.4
+  00B0                81     RXD     BIT     0B0H.0
+  00B1                82     TXD     BIT     0B0H.1
+  00B6                83     LED_GPMY        BIT     0B0H.6
+  00D5                84     F0      BIT     0D0H.5
+  00D0                85     PSW     DATA    0D0H
+                      86     ?PR?_reverse?MAIN    SEGMENT CODE 
+                      87     ?DT?_reverse?MAIN    SEGMENT DATA OVERLAYABLE 
+                      88     ?PR?_itoa?MAIN       SEGMENT CODE 
+                      89     ?DT?_itoa?MAIN       SEGMENT DATA OVERLAYABLE 
+                      90     ?PR?main?MAIN        SEGMENT CODE 
+                      91     ?PR?get_DHT11?MAIN   SEGMENT CODE 
+                      92     ?PR?get_GPMY?MAIN    SEGMENT CODE 
+                      93     ?PR?get_MQ05?MAIN    SEGMENT CODE 
+                      94     ?PR?EX1_ISR?MAIN     SEGMENT CODE 
+                      95     ?CO?MAIN             SEGMENT CODE 
+                      96     ?DT?MAIN             SEGMENT DATA 
+                      97             EXTRN   CODE (_LCD_String_xy)
+                      98             EXTRN   CODE (Uart_Init)
+                      99             EXTRN   CODE (timer_delay280us)
+                     100             EXTRN   CODE (_strlen)
+                     101             EXTRN   CODE (_LCD_String)
+                     102             EXTRN   CODE (Receive_data)
+                     103             EXTRN   CODE (LCD_Init)
+                     104             EXTRN   CODE (_delay_ms)
+                     105             EXTRN   CODE (Response)
+                     106             EXTRN   CODE (timer_delay9680us)
+                     107             EXTRN   CODE (timer_delay20ms)
+                     108             EXTRN   CODE (INT_Init)
+                     109             EXTRN   CODE (timer_delay40us)
+                     110             EXTRN   CODE (Request)
+                     111             EXTRN   CODE (ADC0804_Read)
+                     112             EXTRN   CODE (?C?CLDPTR)
+                     113             EXTRN   CODE (?C?CSTPTR)
+                     114             EXTRN   CODE (?C?SIDIV)
+                     115             EXTRN   CODE (?C?CSTOPTR)
+                     116             EXTRN   CODE (?C_STARTUP)
+                     117             PUBLIC  adc_value_GPMY
+                     118             PUBLIC  I_RH
+                     119             PUBLIC  I_Temp
+                     120             PUBLIC  D_RH
+                     121             PUBLIC  D_Temp
+                     122             PUBLIC  dat
+                     123             PUBLIC  dustDensity
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     3
+
+                     124             PUBLIC  CheckSum
+                     125             PUBLIC  voltage_GPMY
+                     126             PUBLIC  EX1_ISR
+                     127             PUBLIC  get_MQ05
+                     128             PUBLIC  get_GPMY
+                     129             PUBLIC  get_DHT11
+                     130             PUBLIC  main
+                     131             PUBLIC  _itoa
+                     132             PUBLIC  _reverse
+                     133     
+----                 134             RSEG  ?DT?_reverse?MAIN
+0000                 135     ?_reverse?BYTE:
+0000                 136               s?040:   DS   3
+0003                 137             ORG  3
+0003                 138               j?041:   DS   3
+                     139     
+----                 140             RSEG  ?DT?_itoa?MAIN
+0000                 141     ?_itoa?BYTE:
+0000                 142               n?143:   DS   2
+0002                 143             ORG  2
+0002                 144               s?144:   DS   3
+0005                 145             ORG  5
+0005                 146               i?145:   DS   2
+0007                 147             ORG  7
+0007                 148            sign?146:   DS   2
+                     149     
+----                 150             RSEG  ?DT?MAIN
+0000                 151        voltage_GPMY:   DS   2
+0002                 152            CheckSum:   DS   2
+0004                 153         dustDensity:   DS   2
+0006                 154                 dat:   DS   20
+001A                 155              D_Temp:   DS   2
+001C                 156                D_RH:   DS   2
+001E                 157              I_Temp:   DS   2
+0020                 158                I_RH:   DS   2
+0022                 159      adc_value_GPMY:   DS   2
+                     160     
+----                 161             RSEG  ?CO?MAIN
+0000                 162     ?SC_0:
+0000 4572726F        163             DB  'E' ,'r' ,'r' ,'o' ,'r' ,000H
+0004 7200                    
+                     164     
+0006                 165     ?SC_6:
+0006 446F2061        166             DB  'D' ,'o' ,' ' ,'a' ,'m' ,':' ,000H
+000A 6D3A00                  
+                     167     
+000D                 168     ?SC_13:
+000D 204E6869        169             DB  ' ' ,'N' ,'h' ,'i' ,'e' ,'t' ,' ' ,'d' ,'o' ,':' 
+0011 65742064                
+0015 6F3A                    
+0017 00              170             DB  000H
+                     171     
+0018                 172     ?SC_24:
+0018 203100          173             DB  ' ' ,'1' ,000H
+                     174     
+001B                 175     ?SC_27:
+001B 203000          176             DB  ' ' ,'0' ,000H
+                     177     
+                     178     
+----                 179             RSEG ?CO?MAIN
+                     180     ; #include <reg51.h>
+                     181     ; #include <stdio.h>
+                     182     ; #include <string.h>
+                     183     ; #include <stdlib.h>
+                     184     ; #include "main.h"
+                     185     ; #include "port.h"
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     4
+
+                     186     ; #include "lcd.h"
+                     187     ; #include "dht.h"
+                     188     ; #include "delay.h"
+                     189     ; #include "ADC0804.h"
+                     190     ; #include "interrupt.h"
+                     191     ; #include "uart.h"
+                     192     ; 
+                     193     ; int I_RH, D_RH, I_Temp, D_Temp, CheckSum;
+                     194     ; unsigned char dat[20];
+                     195     ; unsigned int adc_value_GPMY;
+                     196     ; unsigned int voltage_GPMY;
+                     197     ; unsigned int dustDensity;
+                     198     ; 
+                     199     ; void get_DHT11();
+                     200     ; void get_MQ05();
+                     201     ; void get_GPMY();
+                     202     ; 
+                     203     ; void reverse(char *s) {
+                     204     
+----                 205             RSEG  ?PR?_reverse?MAIN
+0000                 206     _reverse:
+                     207             USING   0
+                     208                             ; SOURCE LINE # 24
+0000 8B00     F      209             MOV     s?040,R3
+0002 8A00     F      210             MOV     s?040+01H,R2
+0004 8900     F      211             MOV     s?040+02H,R1
+                     212     ;   char * j;
+                     213     ;   int c;
+                     214     ; 
+                     215     ;   j = s + strlen(s) - 1;
+                     216                             ; SOURCE LINE # 28
+0006 120000   F      217             LCALL   _strlen
+0009 E500     F      218             MOV     A,s?040+02H
+000B 2F              219             ADD     A,R7
+000C F9              220             MOV     R1,A
+000D E500     F      221             MOV     A,s?040+01H
+000F 3E              222             ADDC    A,R6
+0010 FA              223             MOV     R2,A
+0011 E9              224             MOV     A,R1
+0012 24FF            225             ADD     A,#0FFH
+0014 F9              226             MOV     R1,A
+0015 EA              227             MOV     A,R2
+0016 34FF            228             ADDC    A,#0FFH
+0018 850000   F      229             MOV     j?041,s?040
+001B F500     F      230             MOV     j?041+01H,A
+001D 8900     F      231             MOV     j?041+02H,R1
+001F                 232     ?C0001:
+                     233     ;   while (s < j) {
+                     234                             ; SOURCE LINE # 29
+001F C3              235             CLR     C
+0020 850083   F      236             MOV     DPH,j?041+01H
+0023 850082   F      237             MOV     DPL,j?041+02H
+0026 E500     F      238             MOV     A,s?040+02H
+0028 9582            239             SUBB    A,DPL
+002A E500     F      240             MOV     A,s?040+01H
+002C 9583            241             SUBB    A,DPH
+002E                 242     ?C0021:
+002E 503F            243             JNC     ?C0003
+                     244     ;     c = * s;
+                     245                             ; SOURCE LINE # 30
+0030 AB00     F      246             MOV     R3,s?040
+0032 AA00     F      247             MOV     R2,s?040+01H
+0034 A900     F      248             MOV     R1,s?040+02H
+0036 120000   F      249             LCALL   ?C?CLDPTR
+0039 FF              250             MOV     R7,A
+003A 33              251             RLC     A
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     5
+
+003B 95E0            252             SUBB    A,ACC
+003D FE              253             MOV     R6,A
+                     254     ;---- Variable 'c?042' assigned to Register 'R6/R7' ----
+                     255     ;     * s++ = * j;
+                     256                             ; SOURCE LINE # 31
+003E AB00     F      257             MOV     R3,j?041
+0040 AA00     F      258             MOV     R2,j?041+01H
+0042 A900     F      259             MOV     R1,j?041+02H
+0044 120000   F      260             LCALL   ?C?CLDPTR
+0047 FD              261             MOV     R5,A
+0048 AB00     F      262             MOV     R3,s?040
+004A 0500     F      263             INC     s?040+02H
+004C E500     F      264             MOV     A,s?040+02H
+004E AA00     F      265             MOV     R2,s?040+01H
+0050 7002            266             JNZ     ?C0022
+0052 0500     F      267             INC     s?040+01H
+0054                 268     ?C0022:
+0054 14              269             DEC     A
+0055 F9              270             MOV     R1,A
+0056 ED              271             MOV     A,R5
+0057 120000   F      272             LCALL   ?C?CSTPTR
+                     273     ;     * j-- = c;
+                     274                             ; SOURCE LINE # 32
+005A AD07            275             MOV     R5,AR7
+005C AB00     F      276             MOV     R3,j?041
+005E E500     F      277             MOV     A,j?041+02H
+0060 1500     F      278             DEC     j?041+02H
+0062 AA00     F      279             MOV     R2,j?041+01H
+0064 7002            280             JNZ     ?C0023
+0066 1500     F      281             DEC     j?041+01H
+0068                 282     ?C0023:
+0068 F9              283             MOV     R1,A
+0069 ED              284             MOV     A,R5
+006A 120000   F      285             LCALL   ?C?CSTPTR
+                     286     ;   }
+                     287                             ; SOURCE LINE # 33
+006D 80B0            288             SJMP    ?C0001
+                     289     ; }
+                     290                             ; SOURCE LINE # 34
+006F                 291     ?C0003:
+006F 22              292             RET     
+                     293     ; END OF _reverse
+                     294     
+                     295     ; 
+                     296     ; void itoa(int n, char s[]) {
+                     297     
+----                 298             RSEG  ?PR?_itoa?MAIN
+0000                 299     L?0028:
+                     300             USING   0
+0000 7B00            301             MOV     R3,#00H
+0002 7A00     F      302             MOV     R2,#HIGH (dat)
+0004 7900     F      303             MOV     R1,#LOW (dat)
+0006                 304     _itoa:
+                     305             USING   0
+                     306                             ; SOURCE LINE # 36
+0006 8E00     F      307             MOV     n?143,R6
+0008 8F00     F      308             MOV     n?143+01H,R7
+000A 8B00     F      309             MOV     s?144,R3
+000C 8A00     F      310             MOV     s?144+01H,R2
+000E 8900     F      311             MOV     s?144+02H,R1
+                     312     ;   int i, sign;
+                     313     ; 
+                     314     ;   if ((sign = n) < 0) 
+                     315                             ; SOURCE LINE # 39
+0010 8E00     F      316             MOV     sign?146,R6
+0012 8F00     F      317             MOV     sign?146+01H,R7
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     6
+
+0014 C3              318             CLR     C
+0015 EE              319             MOV     A,R6
+0016 6480            320             XRL     A,#080H
+0018 9480            321             SUBB    A,#080H
+001A 500B            322             JNC     ?C0004
+                     323     ;     n = -n; 
+                     324                             ; SOURCE LINE # 40
+001C C3              325             CLR     C
+001D E4              326             CLR     A
+001E 9500     F      327             SUBB    A,n?143+01H
+0020 F500     F      328             MOV     n?143+01H,A
+0022 E4              329             CLR     A
+0023 9500     F      330             SUBB    A,n?143
+0025 F500     F      331             MOV     n?143,A
+0027                 332     ?C0004:
+                     333     ;   i = 0;
+                     334                             ; SOURCE LINE # 41
+0027 E4              335             CLR     A
+0028 F500     F      336             MOV     i?145,A
+002A F500     F      337             MOV     i?145+01H,A
+002C                 338     ?C0007:
+                     339     ;   do {
+                     340                             ; SOURCE LINE # 42
+                     341     ;     s[i++] = n % 10 + '0';
+                     342                             ; SOURCE LINE # 43
+002C AE00     F      343             MOV     R6,n?143
+002E AF00     F      344             MOV     R7,n?143+01H
+0030 7C00            345             MOV     R4,#00H
+0032 7D0A            346             MOV     R5,#0AH
+0034 120000   F      347             LCALL   ?C?SIDIV
+0037 ED              348             MOV     A,R5
+0038 2430            349             ADD     A,#030H
+003A FF              350             MOV     R7,A
+003B AB00     F      351             MOV     R3,s?144
+003D AA00     F      352             MOV     R2,s?144+01H
+003F A900     F      353             MOV     R1,s?144+02H
+0041 0500     F      354             INC     i?145+01H
+0043 E500     F      355             MOV     A,i?145+01H
+0045 AC00     F      356             MOV     R4,i?145
+0047 7002            357             JNZ     ?C0024
+0049 0500     F      358             INC     i?145
+004B                 359     ?C0024:
+004B 14              360             DEC     A
+004C F582            361             MOV     DPL,A
+004E 8C83            362             MOV     DPH,R4
+0050 EF              363             MOV     A,R7
+0051 120000   F      364             LCALL   ?C?CSTOPTR
+                     365     ;   } while ((n /= 10) > 0); 
+                     366                             ; SOURCE LINE # 44
+0054 AE00     F      367             MOV     R6,n?143
+0056 AF00     F      368             MOV     R7,n?143+01H
+0058 7C00            369             MOV     R4,#00H
+005A 7D0A            370             MOV     R5,#0AH
+005C 120000   F      371             LCALL   ?C?SIDIV
+005F 8E00     F      372             MOV     n?143,R6
+0061 8F00     F      373             MOV     n?143+01H,R7
+0063 D3              374             SETB    C
+0064 EF              375             MOV     A,R7
+0065 9400            376             SUBB    A,#00H
+0067 EE              377             MOV     A,R6
+0068 6480            378             XRL     A,#080H
+006A 9480            379             SUBB    A,#080H
+006C 50BE            380             JNC     ?C0007
+                     381     ;   if (sign < 0)
+                     382                             ; SOURCE LINE # 45
+006E C3              383             CLR     C
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     7
+
+006F E500     F      384             MOV     A,sign?146
+0071 6480            385             XRL     A,#080H
+0073 9480            386             SUBB    A,#080H
+0075 501A            387             JNC     ?C0008
+                     388     ;     s[i++] = '-';
+                     389                             ; SOURCE LINE # 46
+0077 AB00     F      390             MOV     R3,s?144
+0079 AA00     F      391             MOV     R2,s?144+01H
+007B A900     F      392             MOV     R1,s?144+02H
+007D 0500     F      393             INC     i?145+01H
+007F E500     F      394             MOV     A,i?145+01H
+0081 AE00     F      395             MOV     R6,i?145
+0083 7002            396             JNZ     ?C0025
+0085 0500     F      397             INC     i?145
+0087                 398     ?C0025:
+0087 14              399             DEC     A
+0088 F582            400             MOV     DPL,A
+008A 8E83            401             MOV     DPH,R6
+008C 742D            402             MOV     A,#02DH
+008E 120000   F      403             LCALL   ?C?CSTOPTR
+0091                 404     ?C0008:
+                     405     ;   s[i] = '\0';
+                     406                             ; SOURCE LINE # 47
+0091 AB00     F      407             MOV     R3,s?144
+0093 AA00     F      408             MOV     R2,s?144+01H
+0095 A900     F      409             MOV     R1,s?144+02H
+0097 850082   F      410             MOV     DPL,i?145+01H
+009A 850083   F      411             MOV     DPH,i?145
+009D E4              412             CLR     A
+009E 120000   F      413             LCALL   ?C?CSTOPTR
+                     414     ;   reverse(s);
+                     415                             ; SOURCE LINE # 48
+00A1 020000   F      416             LJMP    _reverse
+                     417     ; END OF _itoa
+                     418     
+                     419     ; }
+                     420     ; 
+                     421     ; void main() {
+                     422     
+----                 423             RSEG  ?PR?main?MAIN
+0000                 424     main:
+                     425             USING   0
+                     426                             ; SOURCE LINE # 51
+                     427     ;       Uart_Init();
+                     428                             ; SOURCE LINE # 52
+0000 120000   F      429             LCALL   Uart_Init
+                     430     ;   LCD_Init();
+                     431                             ; SOURCE LINE # 53
+0003 120000   F      432             LCALL   LCD_Init
+                     433     ;   INT_Init();
+                     434                             ; SOURCE LINE # 54
+0006 120000   F      435             LCALL   INT_Init
+0009                 436     ?C0010:
+                     437     ;   while (1) {
+                     438                             ; SOURCE LINE # 55
+                     439     ; 
+                     440     ;               get_DHT11();
+                     441                             ; SOURCE LINE # 57
+0009 120000   F      442             LCALL   get_DHT11
+                     443     ;     get_GPMY();
+                     444                             ; SOURCE LINE # 58
+000C 120000   F      445             LCALL   get_GPMY
+                     446     ;     get_MQ05();
+                     447                             ; SOURCE LINE # 59
+000F 120000   F      448             LCALL   get_MQ05
+                     449     ;   }
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     8
+
+                     450                             ; SOURCE LINE # 60
+0012 80F5            451             SJMP    ?C0010
+                     452     ; END OF main
+                     453     
+                     454     ; }
+                     455     ; 
+                     456     ; void get_DHT11() {
+                     457     
+----                 458             RSEG  ?PR?get_DHT11?MAIN
+0000                 459     get_DHT11:
+                     460             USING   0
+                     461                             ; SOURCE LINE # 63
+                     462     ;   Request();
+                     463                             ; SOURCE LINE # 64
+0000 120000   F      464             LCALL   Request
+                     465     ;   Response();
+                     466                             ; SOURCE LINE # 65
+0003 120000   F      467             LCALL   Response
+                     468     ; 
+                     469     ;   I_RH = Receive_data();
+                     470                             ; SOURCE LINE # 67
+0006 120000   F      471             LCALL   Receive_data
+0009 8E00     F      472             MOV     I_RH,R6
+000B 8F00     F      473             MOV     I_RH+01H,R7
+                     474     ;   D_RH = Receive_data();
+                     475                             ; SOURCE LINE # 68
+000D 120000   F      476             LCALL   Receive_data
+0010 8E00     F      477             MOV     D_RH,R6
+0012 8F00     F      478             MOV     D_RH+01H,R7
+                     479     ;   I_Temp = Receive_data();
+                     480                             ; SOURCE LINE # 69
+0014 120000   F      481             LCALL   Receive_data
+0017 8E00     F      482             MOV     I_Temp,R6
+0019 8F00     F      483             MOV     I_Temp+01H,R7
+                     484     ;   D_Temp = Receive_data();
+                     485                             ; SOURCE LINE # 70
+001B 120000   F      486             LCALL   Receive_data
+001E 8E00     F      487             MOV     D_Temp,R6
+0020 8F00     F      488             MOV     D_Temp+01H,R7
+                     489     ;   CheckSum = Receive_data();
+                     490                             ; SOURCE LINE # 71
+0022 120000   F      491             LCALL   Receive_data
+0025 8E00     F      492             MOV     CheckSum,R6
+0027 8F00     F      493             MOV     CheckSum+01H,R7
+                     494     ;       
+                     495     ;   if ((I_RH + D_RH + I_Temp + D_Temp) != CheckSum) {
+                     496                             ; SOURCE LINE # 73
+0029 E500     F      497             MOV     A,I_RH+01H
+002B 2500     F      498             ADD     A,D_RH+01H
+002D FF              499             MOV     R7,A
+002E E500     F      500             MOV     A,I_RH
+0030 3500     F      501             ADDC    A,D_RH
+0032 FE              502             MOV     R6,A
+0033 E500     F      503             MOV     A,I_Temp+01H
+0035 2F              504             ADD     A,R7
+0036 FF              505             MOV     R7,A
+0037 E500     F      506             MOV     A,I_Temp
+0039 3E              507             ADDC    A,R6
+003A FE              508             MOV     R6,A
+003B E500     F      509             MOV     A,D_Temp+01H
+003D 2F              510             ADD     A,R7
+003E FF              511             MOV     R7,A
+003F E500     F      512             MOV     A,D_Temp
+0041 3E              513             ADDC    A,R6
+0042 FE              514             MOV     R6,A
+0043 EF              515             MOV     A,R7
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE     9
+
+0044 6500     F      516             XRL     A,CheckSum+01H
+0046 7003            517             JNZ     ?C0026
+0048 EE              518             MOV     A,R6
+0049 6500     F      519             XRL     A,CheckSum
+004B                 520     ?C0026:
+004B 600E            521             JZ      ?C0013
+                     522     ;               LCD_String_xy(0,0,"Error");
+                     523                             ; SOURCE LINE # 74
+004D 7BFF            524             MOV     R3,#0FFH
+004F 7A00     F      525             MOV     R2,#HIGH (?SC_0)
+0051 7900     F      526             MOV     R1,#LOW (?SC_0)
+0053 E4              527             CLR     A
+0054 FD              528             MOV     R5,A
+0055 FF              529             MOV     R7,A
+0056 120000   F      530             LCALL   _LCD_String_xy
+                     531     ;       }
+                     532                             ; SOURCE LINE # 75
+0059 8035            533             SJMP    ?C0014
+005B                 534     ?C0013:
+                     535     ;   else{
+                     536                             ; SOURCE LINE # 76
+                     537     ;               itoa(I_RH, dat);
+                     538                             ; SOURCE LINE # 77
+005B AF00     F      539             MOV     R7,I_RH+01H
+005D AE00     F      540             MOV     R6,I_RH
+005F 120000   F      541             LCALL   L?0028
+                     542     ;               LCD_String_xy(0,0,"Do am:");
+                     543                             ; SOURCE LINE # 78
+0062 7BFF            544             MOV     R3,#0FFH
+0064 7A00     F      545             MOV     R2,#HIGH (?SC_6)
+0066 7900     F      546             MOV     R1,#LOW (?SC_6)
+0068 E4              547             CLR     A
+0069 FD              548             MOV     R5,A
+006A FF              549             MOV     R7,A
+006B 120000   F      550             LCALL   _LCD_String_xy
+                     551     ;               LCD_String(dat);
+                     552                             ; SOURCE LINE # 79
+006E 7B00            553             MOV     R3,#00H
+0070 7A00     F      554             MOV     R2,#HIGH (dat)
+0072 7900     F      555             MOV     R1,#LOW (dat)
+0074 120000   F      556             LCALL   _LCD_String
+                     557     ;               itoa(I_Temp, dat);
+                     558                             ; SOURCE LINE # 80
+0077 AF00     F      559             MOV     R7,I_Temp+01H
+0079 AE00     F      560             MOV     R6,I_Temp
+007B 120000   F      561             LCALL   L?0028
+                     562     ;               LCD_String(" Nhiet do:");
+                     563                             ; SOURCE LINE # 81
+007E 7BFF            564             MOV     R3,#0FFH
+0080 7A00     F      565             MOV     R2,#HIGH (?SC_13)
+0082 7900     F      566             MOV     R1,#LOW (?SC_13)
+0084 120000   F      567             LCALL   _LCD_String
+                     568     ;               LCD_String(dat);
+                     569                             ; SOURCE LINE # 82
+0087 7B00            570             MOV     R3,#00H
+0089 7A00     F      571             MOV     R2,#HIGH (dat)
+008B 7900     F      572             MOV     R1,#LOW (dat)
+008D 120000   F      573             LCALL   _LCD_String
+                     574     ;   }
+                     575                             ; SOURCE LINE # 83
+0090                 576     ?C0014:
+                     577     ;   delay_ms(1000);
+                     578                             ; SOURCE LINE # 84
+0090 7FE8            579             MOV     R7,#0E8H
+0092 7E03            580             MOV     R6,#03H
+0094 020000   F      581             LJMP    _delay_ms
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE    10
+
+                     582     ; END OF get_DHT11
+                     583     
+                     584     ; }
+                     585     ; 
+                     586     ; void get_GPMY() {
+                     587     
+----                 588             RSEG  ?PR?get_GPMY?MAIN
+0000                 589     get_GPMY:
+                     590             USING   0
+                     591                             ; SOURCE LINE # 87
+                     592     ;   LED_GPMY = 1;
+                     593                             ; SOURCE LINE # 88
+0000 D2B6            594             SETB    LED_GPMY
+                     595     ;   timer_delay280us();
+                     596                             ; SOURCE LINE # 89
+0002 120000   F      597             LCALL   timer_delay280us
+                     598     ;   voltage_GPMY = ADC0804_Read();
+                     599                             ; SOURCE LINE # 90
+0005 120000   F      600             LCALL   ADC0804_Read
+0008 750000   F      601             MOV     voltage_GPMY,#00H
+000B 8F00     F      602             MOV     voltage_GPMY+01H,R7
+                     603     ;   timer_delay40us();
+                     604                             ; SOURCE LINE # 91
+000D 120000   F      605             LCALL   timer_delay40us
+                     606     ;   LED_GPMY = 0;
+                     607                             ; SOURCE LINE # 92
+0010 C2B6            608             CLR     LED_GPMY
+                     609     ;   timer_delay9680us();
+                     610                             ; SOURCE LINE # 93
+0012 120000   F      611             LCALL   timer_delay9680us
+                     612     ;       
+                     613     ;       itoa( voltage_GPMY, dat);
+                     614                             ; SOURCE LINE # 95
+0015 7B00            615             MOV     R3,#00H
+0017 7A00     F      616             MOV     R2,#HIGH (dat)
+0019 7900     F      617             MOV     R1,#LOW (dat)
+001B AF00     F      618             MOV     R7,voltage_GPMY+01H
+001D AE00     F      619             MOV     R6,voltage_GPMY
+001F 120000   F      620             LCALL   _itoa
+                     621     ;       LCD_String_xy(1,0,dat);
+                     622                             ; SOURCE LINE # 96
+0022 7B00            623             MOV     R3,#00H
+0024 7A00     F      624             MOV     R2,#HIGH (dat)
+0026 7900     F      625             MOV     R1,#LOW (dat)
+0028 E4              626             CLR     A
+0029 FD              627             MOV     R5,A
+002A 7F01            628             MOV     R7,#01H
+002C 020000   F      629             LJMP    _LCD_String_xy
+                     630     ; END OF get_GPMY
+                     631     
+                     632     ;       
+                     633     ; }
+                     634     ; 
+                     635     ; void get_MQ05() {
+                     636     
+----                 637             RSEG  ?PR?get_MQ05?MAIN
+0000                 638     get_MQ05:
+                     639             USING   0
+                     640                             ; SOURCE LINE # 100
+                     641     ;   if (MQ05) LCD_String(" 1");
+                     642                             ; SOURCE LINE # 101
+0000 7BFF            643             MOV     R3,#0FFH
+0002 30B506          644             JNB     MQ05,?C0017
+0005 7A00     F      645             MOV     R2,#HIGH (?SC_24)
+0007 7900     F      646             MOV     R1,#LOW (?SC_24)
+0009 8004            647             SJMP    ?C0027
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE    11
+
+000B                 648     ?C0017:
+                     649     ;   else LCD_String(" 0");
+                     650                             ; SOURCE LINE # 102
+000B 7A00     F      651             MOV     R2,#HIGH (?SC_27)
+000D 7900     F      652             MOV     R1,#LOW (?SC_27)
+000F                 653     ?C0027:
+000F 120000   F      654             LCALL   _LCD_String
+                     655     ; }
+                     656                             ; SOURCE LINE # 103
+0012                 657     ?C0019:
+0012 22              658             RET     
+                     659     ; END OF get_MQ05
+                     660     
+----                 661     CSEG    AT      00013H
+0013 020000   F      662             LJMP    EX1_ISR
+                     663     
+                     664     ; 
+                     665     ; void EX1_ISR(void) interrupt 2 {
+                     666     
+----                 667             RSEG  ?PR?EX1_ISR?MAIN
+                     668             USING   0
+0000                 669     EX1_ISR:
+0000 C0E0            670             PUSH    ACC
+0002 C0F0            671             PUSH    B
+0004 C083            672             PUSH    DPH
+0006 C082            673             PUSH    DPL
+0008 C0D0            674             PUSH    PSW
+000A 75D000          675             MOV     PSW,#00H
+000D C000            676             PUSH    AR0
+000F C001            677             PUSH    AR1
+0011 C002            678             PUSH    AR2
+0013 C003            679             PUSH    AR3
+0015 C004            680             PUSH    AR4
+0017 C005            681             PUSH    AR5
+0019 C006            682             PUSH    AR6
+001B C007            683             PUSH    AR7
+                     684             USING   0
+                     685                             ; SOURCE LINE # 105
+                     686     ;   timer_delay20ms();
+                     687                             ; SOURCE LINE # 106
+001D 120000   F      688             LCALL   timer_delay20ms
+                     689     ;   LED_LCD = !LED_LCD;
+                     690                             ; SOURCE LINE # 107
+0020 B2B7            691             CPL     LED_LCD
+                     692     ; }                             ; SOURCE LINE # 108
+0022 D007            693             POP     AR7
+0024 D006            694             POP     AR6
+0026 D005            695             POP     AR5
+0028 D004            696             POP     AR4
+002A D003            697             POP     AR3
+002C D002            698             POP     AR2
+002E D001            699             POP     AR1
+0030 D000            700             POP     AR0
+0032 D0D0            701             POP     PSW
+0034 D082            702             POP     DPL
+0036 D083            703             POP     DPH
+0038 D0F0            704             POP     B
+003A D0E0            705             POP     ACC
+003C 32              706             RETI    
+                     707     ; END OF EX1_ISR
+                     708     
+                     709             END
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE    12
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+?C0001 . . . . . .  C ADDR   001FH   R   SEG=?PR?_REVERSE?MAIN
+?C0003 . . . . . .  C ADDR   006FH   R   SEG=?PR?_REVERSE?MAIN
+?C0004 . . . . . .  C ADDR   0027H   R   SEG=?PR?_ITOA?MAIN
+?C0007 . . . . . .  C ADDR   002CH   R   SEG=?PR?_ITOA?MAIN
+?C0008 . . . . . .  C ADDR   0091H   R   SEG=?PR?_ITOA?MAIN
+?C0010 . . . . . .  C ADDR   0009H   R   SEG=?PR?MAIN?MAIN
+?C0013 . . . . . .  C ADDR   005BH   R   SEG=?PR?GET_DHT11?MAIN
+?C0014 . . . . . .  C ADDR   0090H   R   SEG=?PR?GET_DHT11?MAIN
+?C0017 . . . . . .  C ADDR   000BH   R   SEG=?PR?GET_MQ05?MAIN
+?C0019 . . . . . .  C ADDR   0012H   R   SEG=?PR?GET_MQ05?MAIN
+?C0021 . . . . . .  C ADDR   002EH   R   SEG=?PR?_REVERSE?MAIN
+?C0022 . . . . . .  C ADDR   0054H   R   SEG=?PR?_REVERSE?MAIN
+?C0023 . . . . . .  C ADDR   0068H   R   SEG=?PR?_REVERSE?MAIN
+?C0024 . . . . . .  C ADDR   004BH   R   SEG=?PR?_ITOA?MAIN
+?C0025 . . . . . .  C ADDR   0087H   R   SEG=?PR?_ITOA?MAIN
+?C0026 . . . . . .  C ADDR   004BH   R   SEG=?PR?GET_DHT11?MAIN
+?C0027 . . . . . .  C ADDR   000FH   R   SEG=?PR?GET_MQ05?MAIN
+?C?CLDPTR. . . . .  C ADDR   -----       EXT
+?C?CSTOPTR . . . .  C ADDR   -----       EXT
+?C?CSTPTR. . . . .  C ADDR   -----       EXT
+?C?SIDIV . . . . .  C ADDR   -----       EXT
+?CO?MAIN . . . . .  C SEG    001EH       REL=UNIT
+?C_STARTUP . . . .  C ADDR   -----       EXT
+?DT?MAIN . . . . .  D SEG    0024H       REL=UNIT
+?DT?_ITOA?MAIN . .  D SEG    0009H       REL=UNIT
+?DT?_REVERSE?MAIN.  D SEG    0006H       REL=UNIT
+?PR?EX1_ISR?MAIN .  C SEG    003DH       REL=UNIT
+?PR?GET_DHT11?MAIN  C SEG    0097H       REL=UNIT
+?PR?GET_GPMY?MAIN.  C SEG    002FH       REL=UNIT
+?PR?GET_MQ05?MAIN.  C SEG    0013H       REL=UNIT
+?PR?MAIN?MAIN. . .  C SEG    0014H       REL=UNIT
+?PR?_ITOA?MAIN . .  C SEG    00A4H       REL=UNIT
+?PR?_REVERSE?MAIN.  C SEG    0070H       REL=UNIT
+?SC_0. . . . . . .  C ADDR   0000H   R   SEG=?CO?MAIN
+?SC_13 . . . . . .  C ADDR   000DH   R   SEG=?CO?MAIN
+?SC_24 . . . . . .  C ADDR   0018H   R   SEG=?CO?MAIN
+?SC_27 . . . . . .  C ADDR   001BH   R   SEG=?CO?MAIN
+?SC_6. . . . . . .  C ADDR   0006H   R   SEG=?CO?MAIN
+?_ITOA?BYTE. . . .  D ADDR   0000H   R   SEG=?DT?_ITOA?MAIN
+?_REVERSE?BYTE . .  D ADDR   0000H   R   SEG=?DT?_REVERSE?MAIN
+AC . . . . . . . .  B ADDR   00D0H.6 A   
+ACC. . . . . . . .  D ADDR   00E0H   A   
+ADC0804_CS . . . .  B ADDR   0090H.3 A   
+ADC0804_INTR . . .  B ADDR   0090H.6 A   
+ADC0804_RD . . . .  B ADDR   0090H.4 A   
+ADC0804_READ . . .  C ADDR   -----       EXT
+ADC0804_WR . . . .  B ADDR   0090H.5 A   
+ADC_VALUE_GPMY . .  D ADDR   0022H   R   SEG=?DT?MAIN
+AR0. . . . . . . .  D ADDR   0000H   A   
+AR1. . . . . . . .  D ADDR   0001H   A   
+AR2. . . . . . . .  D ADDR   0002H   A   
+AR3. . . . . . . .  D ADDR   0003H   A   
+AR4. . . . . . . .  D ADDR   0004H   A   
+AR5. . . . . . . .  D ADDR   0005H   A   
+AR6. . . . . . . .  D ADDR   0006H   A   
+AR7. . . . . . . .  D ADDR   0007H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+CHECKSUM . . . . .  D ADDR   0002H   R   SEG=?DT?MAIN
+CY . . . . . . . .  B ADDR   00D0H.7 A   
+DAT. . . . . . . .  D ADDR   0006H   R   SEG=?DT?MAIN
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE    13
+
+DHT11. . . . . . .  B ADDR   00B0H.4 A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+DUSTDENSITY. . . .  D ADDR   0004H   R   SEG=?DT?MAIN
+D_RH . . . . . . .  D ADDR   001CH   R   SEG=?DT?MAIN
+D_TEMP . . . . . .  D ADDR   001AH   R   SEG=?DT?MAIN
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EN . . . . . . . .  B ADDR   0090H.0 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+EX1_ISR. . . . . .  C ADDR   0000H   R   SEG=?PR?EX1_ISR?MAIN
+F0 . . . . . . . .  B ADDR   00D0H.5 A   
+GET_DHT11. . . . .  C ADDR   0000H   R   SEG=?PR?GET_DHT11?MAIN
+GET_GPMY . . . . .  C ADDR   0000H   R   SEG=?PR?GET_GPMY?MAIN
+GET_MQ05 . . . . .  C ADDR   0000H   R   SEG=?PR?GET_MQ05?MAIN
+I?145. . . . . . .  D ADDR   0005H   R   SEG=?DT?_ITOA?MAIN
+IE . . . . . . . .  D ADDR   00A8H   A   
+IE0. . . . . . . .  B ADDR   0088H.1 A   
+IE1. . . . . . . .  B ADDR   0088H.3 A   
+INT0 . . . . . . .  B ADDR   00B0H.2 A   
+INT1 . . . . . . .  B ADDR   00B0H.3 A   
+INT_INIT . . . . .  C ADDR   -----       EXT
+INT_LCD. . . . . .  B ADDR   00B0H.3 A   
+IP . . . . . . . .  D ADDR   00B8H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+I_RH . . . . . . .  D ADDR   0020H   R   SEG=?DT?MAIN
+I_TEMP . . . . . .  D ADDR   001EH   R   SEG=?DT?MAIN
+J?041. . . . . . .  D ADDR   0003H   R   SEG=?DT?_REVERSE?MAIN
+L?0028 . . . . . .  C ADDR   0000H   R   SEG=?PR?_ITOA?MAIN
+LCD_INIT . . . . .  C ADDR   -----       EXT
+LED_GPMY . . . . .  B ADDR   00B0H.6 A   
+LED_LCD. . . . . .  B ADDR   00B0H.7 A   
+MAIN . . . . . . .  C ADDR   0000H   R   SEG=?PR?MAIN?MAIN
+MQ05 . . . . . . .  B ADDR   00B0H.5 A   
+N?143. . . . . . .  D ADDR   0000H   R   SEG=?DT?_ITOA?MAIN
+OV . . . . . . . .  B ADDR   00D0H.2 A   
+P. . . . . . . . .  B ADDR   00D0H.0 A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+PS . . . . . . . .  B ADDR   00B8H.4 A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+PT0. . . . . . . .  B ADDR   00B8H.1 A   
+PT1. . . . . . . .  B ADDR   00B8H.3 A   
+PX0. . . . . . . .  B ADDR   00B8H.0 A   
+PX1. . . . . . . .  B ADDR   00B8H.2 A   
+RB8. . . . . . . .  B ADDR   0098H.2 A   
+RD . . . . . . . .  B ADDR   00B0H.7 A   
+RECEIVE_DATA . . .  C ADDR   -----       EXT
+REN. . . . . . . .  B ADDR   0098H.4 A   
+REQUEST. . . . . .  C ADDR   -----       EXT
+RESPONSE . . . . .  C ADDR   -----       EXT
+RI . . . . . . . .  B ADDR   0098H.0 A   
+RS . . . . . . . .  B ADDR   0090H.2 A   
+RS0. . . . . . . .  B ADDR   00D0H.3 A   
+RS1. . . . . . . .  B ADDR   00D0H.4 A   
+RW . . . . . . . .  B ADDR   0090H.1 A   
+RXD. . . . . . . .  B ADDR   00B0H.0 A   
+S?040. . . . . . .  D ADDR   0000H   R   SEG=?DT?_REVERSE?MAIN
+S?144. . . . . . .  D ADDR   0002H   R   SEG=?DT?_ITOA?MAIN
+A51 MACRO ASSEMBLER  MAIN                                                                 03/15/2022 22:42:26 PAGE    14
+
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SIGN?146 . . . . .  D ADDR   0007H   R   SEG=?DT?_ITOA?MAIN
+SM0. . . . . . . .  B ADDR   0098H.7 A   
+SM1. . . . . . . .  B ADDR   0098H.6 A   
+SM2. . . . . . . .  B ADDR   0098H.5 A   
+SP . . . . . . . .  D ADDR   0081H   A   
+T0 . . . . . . . .  B ADDR   00B0H.4 A   
+T1 . . . . . . . .  B ADDR   00B0H.5 A   
+TB8. . . . . . . .  B ADDR   0098H.3 A   
+TCON . . . . . . .  D ADDR   0088H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TIMER_DELAY20MS. .  C ADDR   -----       EXT
+TIMER_DELAY280US .  C ADDR   -----       EXT
+TIMER_DELAY40US. .  C ADDR   -----       EXT
+TIMER_DELAY9680US.  C ADDR   -----       EXT
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+TXD. . . . . . . .  B ADDR   00B0H.1 A   
+UART_INIT. . . . .  C ADDR   -----       EXT
+UART_RX. . . . . .  B ADDR   00B0H.0 A   
+UART_TX. . . . . .  B ADDR   00B0H.1 A   
+VOLTAGE_GPMY . . .  D ADDR   0000H   R   SEG=?DT?MAIN
+WR . . . . . . . .  B ADDR   00B0H.6 A   
+_DELAY_MS. . . . .  C ADDR   -----       EXT
+_ITOA. . . . . . .  C ADDR   0006H   R   SEG=?PR?_ITOA?MAIN
+_LCD_STRING. . . .  C ADDR   -----       EXT
+_LCD_STRING_XY . .  C ADDR   -----       EXT
+_REVERSE . . . . .  C ADDR   0000H   R   SEG=?PR?_REVERSE?MAIN
+_STRLEN. . . . . .  C ADDR   -----       EXT
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
